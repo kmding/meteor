@@ -18,6 +18,11 @@ Router.map(function () {
     template: 'home',
     layoutTemplate: 'masterLayout'
   });
+  this.route('loading', {
+    path: 'loading',
+    template: 'loading',
+    layoutTemplate: 'masterLayout'
+  });
   // User Mgmt Route
   this.route('usermgmt', {
     path: '/usermgmt',
@@ -58,4 +63,3 @@ Router.map(function () {
       Router.go("/");
   });
 });
-
