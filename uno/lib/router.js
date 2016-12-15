@@ -18,6 +18,21 @@ Router.map(function () {
     template: 'home',
     layoutTemplate: 'masterLayout'
   });
+  // User Mgmt Route
+  this.route('usermgmt', {
+    path: '/usermgmt',
+    template: 'userManagement',
+    layoutTemplate: 'masterLayout',
+    onBeforeAction: function() {
+      if (Meteor.loggingIn()) {
+          this.render(this.loadingTemplate);
+      } else if(!Roles.userIsInRole(Meteor.user(), ['admin'])) {
+          this.redirect('/');
+      }
+      this.next();
+    },
+    loadingTemplate: 'loading'
+  });
   // Sign In Route
   AccountsTemplates.configureRoute('signIn', {
       name: 'signin',
@@ -43,3 +58,4 @@ Router.map(function () {
       Router.go("/");
   });
 });
+
